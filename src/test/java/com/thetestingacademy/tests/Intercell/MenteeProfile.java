@@ -1,6 +1,6 @@
 package com.thetestingacademy.tests.Intercell;
 
-import com.thetestingacademy.CommonToALL;
+import com.thetestingacademy.base.CommonToALL;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class MenteeProfile extends CommonToALL {
+public class MenteeProfile extends com.thetestingacademy.base.CommonToALL {
 
     @Test
     public void menteeProfileUpdate(){

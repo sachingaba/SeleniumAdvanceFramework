@@ -1,4 +1,4 @@
-# 🚀 API Automation Framework using Rest Assured (Java)
+# 🚀 API Automation Framework using Selenium (Java)
 
 ### 👨‍💻 Author: **Sachin Gaba**
 A **powerful, scalable, and CI/CD-ready API Automation Framework** built using **Rest Assured + Java** for testing **Restful Booker CRUD APIs**.
@@ -7,7 +7,7 @@ A **powerful, scalable, and CI/CD-ready API Automation Framework** built using *
 
 ## 📌 Project Highlights
 
-✅ End-to-End REST API Automation  
+✅ End-to-End Selenium Web UI
 ✅ Hybrid Framework Design  
 ✅ CI/CD Enabled with Jenkins  
 ✅ Parallel Test Execution  
