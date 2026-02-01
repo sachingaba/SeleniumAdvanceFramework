@@ -1,7 +1,7 @@
 package com.thetestingacademy.tests.Intercell;
 
-import com.thetestingacademy.CommonToALL;
-import com.thetestingacademy.ex_07_Wait_Helper.WaitHelpers;
+import com.thetestingacademy.base.CommonToALL;
+import com.thetestingacademy.baseTest.WaitHelpers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

@@ -1,6 +1,6 @@
 package com.thetestingacademy.tests.TTA_BaNK;
 
-import com.thetestingacademy.CommonToALL;
+import com.thetestingacademy.base.CommonToALL;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;

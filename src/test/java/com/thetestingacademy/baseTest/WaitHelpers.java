@@ -1,4 +1,4 @@
-package com.thetestingacademy.base;
+package com.thetestingacademy.baseTest;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
