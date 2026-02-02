@@ -34,11 +34,13 @@ public class profilePage {
 
     private By chooseMonth = By.xpath("//table[@class=\"mat-calendar-table\"]/tbody/tr[2]/td[2]");
     private By chooseDate = By.xpath("//table[@class=\"mat-calendar-table\"]/tbody/tr[2]/td[3]");
+    private By experience = By.xpath("//select[@name=\"experience\"]");
     private By submitProfile = By.xpath("//button[@id=\"edit\"]");
 
-    /// /table[@class="mat-calendar-table"]/tbody
-    /// //table[@class="mat-calendar-table"]/tbody/tr/td[@aria-label="1995"]
+
     public void updateProfile() {
+
+
         driver.findElement(myProfile).click();
         driver.findElement(viewProfile).click();
         driver.findElement(firstName).clear();
@@ -88,6 +90,11 @@ WaitHelpers.checkVisibility(driver,chooseYear);
 driver.findElement(chooseYear).click();
                 driver.findElement(chooseMonth).click();
                 driver.findElement(chooseDate).click();
+
+              WebElement ex=  driver.findElement(experience);
+              ex.click();
+        Select selectExperience = new Select(ex);
+        selectExperience.selectByVisibleText(PropertiesReader.readKey("Experience"));
 
                 driver.findElement(submitProfile).click();
 
