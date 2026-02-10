@@ -23,7 +23,7 @@ public class menteeLoginpage {
 
 
     public String loginToIC_Invalid(String username , String password){
-
+        System.out.println("Driver: " + driver);
         driver.get(PropertiesReader.readKey("url"));
         driver.findElement(username_path).sendKeys(username);
         driver.findElement(password_path).sendKeys(password);
@@ -40,7 +40,7 @@ public class menteeLoginpage {
 
     }
     public void loginToIC_Valid(String username , String password){
-
+        System.out.println("Driver: " + driver);
         driver.get(PropertiesReader.readKey("url"));
         driver.findElement(username_path).sendKeys(username);
         driver.findElement(password_path).sendKeys(password);
