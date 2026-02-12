@@ -1,41 +1,53 @@
 package com.thetestingacademy.base;
 
+import com.thetestingacademy.utils.PropertiesReader;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
+import org.openqa.selenium.WebElement;
+
+
+import static com.thetestingacademy.driver.DriverManager.getDriver;
 
 public class CommonToALL {
+    // Common functionality for all tests
 
-    public void openBrowser(WebDriver driver, String url){
-        driver.get(url);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(1000));
-                driver.manage().window().maximize();
-        customWait(2000);
-
+    public void openVWOUrl() {
+        getDriver().get(PropertiesReader.readKey("url"));
     }
-    public void closeBrowser(WebDriver driver){
 
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        driver.quit();
+    public void openOrangeHRMUrl(){
+        getDriver().get(PropertiesReader.readKey("ohr_url"));
     }
-    public void customWait(int time){
-        try {
-            Thread.sleep(time);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    public void waitForVisibility(WebDriver driver, int timeinSeconds, String Xpath){
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeinSeconds));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Xpath)));
 
-
+    public void openKatalonUrl(){
+        getDriver().get(PropertiesReader.readKey("katalon_url"));
     }
+
+    public void openTTABankUrl(){
+        getDriver().get(PropertiesReader.readKey("url_tta_bank"));
+    }
+
+    public void clickElement(By by){
+        getDriver().findElement(by).click();
+    }
+
+    public void clickElement(WebElement by) {
+        by.click();
+    }
+    public void enterInput(By by, String key) {
+        getDriver().findElement(by).sendKeys(key);
+    }
+
+    public void enterInput(WebElement by, String key) {
+        by.sendKeys(key);
+    }
+
+    public String getText(By by){
+        return getDriver().findElement(by).getText();
+    }
+
+    public String getText(WebElement by){
+        return by.getText();
+    }
+
 }

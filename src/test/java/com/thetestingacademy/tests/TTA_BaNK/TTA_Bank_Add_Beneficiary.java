@@ -21,9 +21,8 @@ public class TTA_Bank_Add_Beneficiary extends CommonToALL {
 public void test_add_beneficiary(){
 
         WebDriver driver = new ChromeDriver();
-        openBrowser(driver,"https://tta-bank-digital-973242068062.us-west1.run.app/");
+        driver.get("https://tta-bank-digital-973242068062.us-west1.run.app/");
 
-customWait(2000);
 
 //Login User
 //        WebElement login_input = driver.findElement(By.xpath("//input[@type=\"email\"]"));
@@ -59,7 +58,7 @@ customWait(2000);
 
 
 
-customWait(3000);
+
 
 
         WebElement verify_dash = driver.findElement(By.xpath("//h1[contains(text(),\"Dashboard\")]"));
@@ -84,7 +83,7 @@ customWait(3000);
         WebElement save_ben = driver.findElement(By.xpath("//button[text()=\"Save Beneficiary\"]"));
         save_ben.click();
 
-        customWait(2000);
+
 
             //WebElement add_ben = driver.findElement(By.xpath("//button[text()=\"Manage Beneficiaries\"]"));
             add_ben.click();
@@ -94,7 +93,7 @@ customWait(3000);
         Assert.assertEquals(verify_ben.getText(),"Gurleen kaur");
 
 
-closeBrowser(driver);
+
 
 
 
