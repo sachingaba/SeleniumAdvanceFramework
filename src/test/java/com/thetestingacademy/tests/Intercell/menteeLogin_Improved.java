@@ -22,29 +22,31 @@ public class menteeLogin_Improved extends CommonToAllTest {
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCredentials_Error() {
 
-        //Page Object Model
+        // Page Object Model
         logger.info("login to Intercell Website");
         logger.info("Hello");
         menteeLoginpage l1 = new menteeLoginpage(DriverManager.getDriver());
-        String error_msg = l1.loginToIC_Invalid(PropertiesReader.readKey("user"),PropertiesReader.readKey("invalid_pass"));
+        String error_msg = l1.loginToIC_Invalid(PropertiesReader.readKey("user"),
+                PropertiesReader.readKey("invalid_pass"));
 
-        //Assertions
+        // Assertions
         logger.info("Asserting Conditions");
         assertThat(error_msg).isNotNull().isNotEmpty().isNotBlank();
-        Assert.assertEquals(error_msg,PropertiesReader.readKey("login_error_ms"));
+        Assert.assertEquals(error_msg, PropertiesReader.readKey("login_error_ms"));
 
     }
+
+    @Owner("Sachin Gaba")
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCredentials_Valid() {
 
-
-        //Page Object Model
+        // Page Object Model
         menteeLoginpage l2 = new menteeLoginpage(DriverManager.getDriver());
-l2.loginToIC_Valid(PropertiesReader.readKey("user"),PropertiesReader.readKey("pass"));
+        l2.loginToIC_Valid(PropertiesReader.readKey("user"), PropertiesReader.readKey("pass"));
 
-        //Assertions
+        // Assertions
 
-        Assert.assertEquals(DriverManager.driver.getCurrentUrl(),PropertiesReader.readKey("login_dashboard_url"));
+        Assert.assertEquals(DriverManager.driver.getCurrentUrl(), PropertiesReader.readKey("login_dashboard_url"));
 
     }
 }

@@ -11,6 +11,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import io.qameta.allure.Owner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -22,33 +23,36 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 public class menteeLogin {
 
-
+    @Owner("Sachin Gaba")
     @Test
     public void verifyCredentials_Error() {
-        //Driver class
+        // Driver class
         WebDriver driver = new ChromeDriver();
 
-        //Page Object Model
+        // Page Object Model
         menteeLoginpage l1 = new menteeLoginpage(driver);
-        String error_msg = l1.loginToIC_Invalid(PropertiesReader.readKey("user"),PropertiesReader.readKey("invalid_pass"));
+        String error_msg = l1.loginToIC_Invalid(PropertiesReader.readKey("user"),
+                PropertiesReader.readKey("invalid_pass"));
 
-        //Assertions
+        // Assertions
         assertThat(error_msg).isNotNull().isNotEmpty().isNotBlank();
-        Assert.assertEquals(error_msg,PropertiesReader.readKey("login_error_msg"));
+        Assert.assertEquals(error_msg, PropertiesReader.readKey("login_error_msg"));
         driver.quit();
     }
+
+    @Owner("Sachin Gaba")
     @Test
     public void verifyCredentials_Valid() {
-        //Driver class
+        // Driver class
         WebDriver driver = new ChromeDriver();
 
-        //Page Object Model
+        // Page Object Model
         menteeLoginpage l2 = new menteeLoginpage(driver);
-l2.loginToIC_Valid(PropertiesReader.readKey("user"),PropertiesReader.readKey("pass"));
+        l2.loginToIC_Valid(PropertiesReader.readKey("user"), PropertiesReader.readKey("pass"));
 
-        //Assertions
+        // Assertions
 
-        Assert.assertEquals(driver.getCurrentUrl(),PropertiesReader.readKey("login_dashboard_url"));
+        Assert.assertEquals(driver.getCurrentUrl(), PropertiesReader.readKey("login_dashboard_url"));
         driver.quit();
     }
 }

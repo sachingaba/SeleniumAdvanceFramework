@@ -18,6 +18,7 @@ public class DriverManager {
     public static void setDriver(WebDriver driver) {
         DriverManager.driver = driver;
     }
+
     public static WebDriver driver;
 
     public static void init() {
@@ -25,43 +26,40 @@ public class DriverManager {
         String browser = PropertiesReader.readKey("browser");
         browser = browser.toLowerCase();
 
-    switch (browser){
-        case "chrome":
+        switch (browser) {
+            case "chrome":
                 System.out.println("You Chose --> Chrome");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--start--maximize");
                 chromeOptions.addArguments("--guest");
-            driver = new ChromeDriver(chromeOptions);
+                driver = new ChromeDriver(chromeOptions);
 
-               break;
-        case "edge":
-                 System.out.println("You Chose --> Edge");
-                 EdgeOptions edgeOptions = new EdgeOptions();
-                 edgeOptions.addArguments("--start--maximize");
-                 edgeOptions.addArguments("--guest");
-            driver = new EdgeDriver(edgeOptions);
-                 break;
-        case "firefox":
-                    System.out.println("You Chose --> Firefox");
-                    FirefoxOptions firefoxOptions = new FirefoxOptions();
-                    firefoxOptions.addArguments("--start--maximize");
-                    firefoxOptions.addArguments("--guest");
-            driver = new FirefoxDriver(firefoxOptions);
-                  break;
-        default:
-        System.out.println("NO Browser Selected !!!!");
-
+                break;
+            case "edge":
+                System.out.println("You Chose --> Edge");
+                EdgeOptions edgeOptions = new EdgeOptions();
+                edgeOptions.addArguments("--start--maximize");
+                edgeOptions.addArguments("--guest");
+                driver = new EdgeDriver(edgeOptions);
+                break;
+            case "firefox":
+                System.out.println("You Chose --> Firefox");
+                FirefoxOptions firefoxOptions = new FirefoxOptions();
+                firefoxOptions.addArguments("--start--maximize");
+                firefoxOptions.addArguments("--guest");
+                driver = new FirefoxDriver(firefoxOptions);
+                break;
+            default:
+                System.out.println("NO Browser Selected !!!!");
 
         }
     }
 
-    public static void down(){
-        if(getDriver()!=null){
+    public static void down() {
+        if (getDriver() != null) {
             driver.quit();
             driver = null;
         }
 
     }
 }
-
-

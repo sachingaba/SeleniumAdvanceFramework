@@ -7,6 +7,7 @@ import com.thetestingacademy.pages.menteeLoginpage;
 import com.thetestingacademy.utils.PropertiesReader;
 import com.thetestingacademy.utils.WaitHelpers;
 import org.openqa.selenium.By;
+import io.qameta.allure.Owner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -14,16 +15,18 @@ import static com.thetestingacademy.driver.DriverManager.driver;
 
 public class UpcomingSessionWithoutBooking extends CommonToAllTest {
 
+    @Owner("Sachin Gaba")
     @Test
-    public void viewSession(){
+    public void viewSession() {
 
         menteeLoginpage login = new menteeLoginpage(DriverManager.getDriver());
-        login.loginToIC_Valid(PropertiesReader.readKey("user"),PropertiesReader.readKey("pass"));
+        login.loginToIC_Valid(PropertiesReader.readKey("user"), PropertiesReader.readKey("pass"));
 
         UpcomingSessionPage upcomingSessionPage = new UpcomingSessionPage(DriverManager.getDriver());
         upcomingSessionPage.viewUpcomingSession();
-        WaitHelpers.checkVisibility(driver,By.xpath("//a[@href=\"/account/upcoming\" and span]"));
+        WaitHelpers.checkVisibility(driver, By.xpath("//a[@href=\"/account/upcoming\" and span]"));
         WaitHelpers.waitJVM(3000);
-        Assert.assertEquals(driver.findElement(By.xpath("//h1[text()=\"Session Details\"]")).getText(),"Session Details");
+        Assert.assertEquals(driver.findElement(By.xpath("//h1[text()=\"Session Details\"]")).getText(),
+                "Session Details");
     }
 }
