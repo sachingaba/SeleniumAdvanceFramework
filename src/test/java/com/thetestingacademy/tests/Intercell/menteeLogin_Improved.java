@@ -5,6 +5,7 @@ import com.thetestingacademy.driver.DriverManager;
 import com.thetestingacademy.listeners.RetryAnalyzer;
 import com.thetestingacademy.pages.menteeLoginpage;
 import com.thetestingacademy.utils.PropertiesReader;
+import io.qameta.allure.Attachment;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +20,7 @@ public class menteeLogin_Improved extends CommonToAllTest {
 
     @Owner("Sachin Gaba")
     @Description("Verify that with invalid email, pass, error message is shown on the website")
+    @Attachment(value = "Profile screenshot", type = "image/png")
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCredentials_Error() {
 

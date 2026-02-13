@@ -32,6 +32,7 @@ public class DriverManager {
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.addArguments("--start--maximize");
                 chromeOptions.addArguments("--guest");
+                chromeOptions.addArguments("--headerless=new");
                 driver = new ChromeDriver(chromeOptions);
 
                 break;

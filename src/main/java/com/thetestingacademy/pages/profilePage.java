@@ -6,6 +6,8 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,9 +18,13 @@ import java.util.List;
 public class profilePage {
     public profilePage(WebDriver driver) {
         this.driver = driver;
+        PageFactory.initElements(driver,this);
     }
 
     WebDriver driver;
+
+    @FindBy(name ="firstName")
+    private WebElement username;
 
     private By myProfile = By.xpath("//li[@id=\"menuProfile\"]");
     private By viewProfile = By.id("view_profile");
