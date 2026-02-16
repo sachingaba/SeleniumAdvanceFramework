@@ -11,7 +11,7 @@ import static com.thetestingacademy.driver.DriverManager.getDriver;
 public class CommonToALL {
     // Common functionality for all tests
 
-    public void openVWOUrl() {
+    public void openIntercell() {
         getDriver().get(PropertiesReader.readKey("url"));
     }
 
