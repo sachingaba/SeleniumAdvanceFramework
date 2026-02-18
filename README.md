@@ -544,7 +544,7 @@ Static methods and fields are used for **shared, stateless utilities** that don'
 ## ▶️ Run the Test Suite
 
 ```bash
-mvn clean test -Dsurefire.suiteXmlFiles=testng.xml
+mvn clean test -Dsurefire.suiteXmlFiles=testngWithListener.xml
 ```
 
 ### Maven Profiles

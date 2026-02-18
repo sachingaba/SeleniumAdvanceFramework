@@ -34,7 +34,7 @@ public class menteeLogin_Improved extends CommonToAllTest {
         // Assertions
         logger.info("Asserting Conditions");
         assertThat(error_msg).isNotNull().isNotEmpty().isNotBlank();
-        Assert.assertEquals(error_msg, PropertiesReader.readKey("login_error_ms"));
+        Assert.assertEquals(error_msg, PropertiesReader.readKey("login_error_msg"));
 
     }
 

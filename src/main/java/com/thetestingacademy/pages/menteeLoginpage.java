@@ -2,6 +2,7 @@ package com.thetestingacademy.pages;
 
 import com.thetestingacademy.base.CommonToALL;
 import com.thetestingacademy.driver.DriverManager;
+import com.thetestingacademy.driver.DriverManagerTL;
 import com.thetestingacademy.utils.PropertiesReader;
 import com.thetestingacademy.utils.WaitHelpers;
 import org.openqa.selenium.By;
@@ -26,7 +27,7 @@ public class menteeLoginpage extends CommonToALL {
 
 
     public String loginToIC_Invalid(String username , String password){
-        System.out.println("Driver: " + driver);
+        System.out.println("Driver: " + DriverManagerTL.getDriver());
 
         openIntercell();
         enterInput(username_path,username);
@@ -36,7 +37,7 @@ public class menteeLoginpage extends CommonToALL {
         clickElement(signin_btn);
         // driver.findElement(signin_btn).click();
 
-        WaitHelpers.checkVisibility(driver,error_msg);
+        WaitHelpers.checkVisibility(DriverManagerTL.getDriver(),error_msg);
 
 //        String error_msg_text = driver.findElement(error_msg).getText();
 //        return error_msg_text;
@@ -46,11 +47,11 @@ public class menteeLoginpage extends CommonToALL {
 
     }
     public void loginToIC_Valid(String username , String password){
-        System.out.println("Driver: " + driver);
-        driver.get(PropertiesReader.readKey("url"));
-        driver.findElement(username_path).sendKeys(username);
-        driver.findElement(password_path).sendKeys(password);
-        driver.findElement(signin_btn).click();
+        System.out.println("Driver: " + DriverManagerTL.getDriver());
+      DriverManagerTL.getDriver().get(PropertiesReader.readKey("url"));
+        DriverManagerTL.getDriver().findElement(username_path).sendKeys(username);
+        DriverManagerTL.getDriver().findElement(password_path).sendKeys(password);
+        DriverManagerTL.getDriver().findElement(signin_btn).click();
 
         WaitHelpers.waitJVM(3000);
     }

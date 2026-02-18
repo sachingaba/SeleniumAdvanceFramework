@@ -14,58 +14,60 @@ public class DriverManagerTL {
     public static final ThreadLocal<WebDriver> local = new ThreadLocal<>();
 
     public static WebDriver getDriver() {
-       return local.get();
+        return local.get();
     }
 
     public static void setDriver(WebDriver driver) {
         local.set(driver);
     }
+
     public static void unload() {
         local.remove();
     }
-    public static void init() {
 
-        String browser = PropertiesReader.readKey("browser");
-        browser = browser.toLowerCase();
+    public static void init() {
+        String browser = PropertiesReader.readKey("browser").toLowerCase();
+
+        WebDriver driver = null;  // Declare OUTSIDE switch
 
         switch (browser) {
             case "chrome":
                 System.out.println("You Chose --> Chrome");
                 ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--start--maximize");
-                chromeOptions.addArguments("--guest");
-                chromeOptions.addArguments("--headerless=new");
-                WebDriver driver = new ChromeDriver(chromeOptions);
-                setDriver(driver);
-
+                chromeOptions.addArguments("--start-maximized");  // Fixed typo
+                chromeOptions.addArguments("--incognito");        // Fixed typo
+                //  chromeOptions.addArguments("--headless=new");     // Fixed typo
+                driver = new ChromeDriver(chromeOptions);
+                System.out.println("Driver Assigned");
                 break;
+
             case "edge":
                 System.out.println("You Chose --> Edge");
                 EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--start--maximize");
-                edgeOptions.addArguments("--guest");
+                edgeOptions.addArguments("--start-maximized");
+                edgeOptions.addArguments("--inprivate");  // Edge uses "inprivate"
                 driver = new EdgeDriver(edgeOptions);
-                setDriver(driver);
                 break;
+
             case "firefox":
                 System.out.println("You Chose --> Firefox");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
-                firefoxOptions.addArguments("--start--maximize");
-                firefoxOptions.addArguments("--guest");
+                firefoxOptions.addArguments("--width=1920");
+                firefoxOptions.addArguments("--height=1080");
                 driver = new FirefoxDriver(firefoxOptions);
-                setDriver(driver);
                 break;
-            default:
-                System.out.println("NO Browser Selected !!!!");
 
+            default:
+                throw new IllegalArgumentException("Invalid browser: " + browser);
         }
+
+        DriverManagerTL.setDriver(driver);  // ✅ ThreadLocal usage PERFECT!
     }
 
     public static void down() {
-        if (DriverManagerTL.getDriver() != null) {
-            getDriver().quit();
+        if (getDriver() != null) {
+            DriverManagerTL.getDriver().quit();
 
         }
-
     }
 }

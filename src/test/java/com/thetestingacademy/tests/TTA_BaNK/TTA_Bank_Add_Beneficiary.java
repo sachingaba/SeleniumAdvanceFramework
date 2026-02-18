@@ -1,6 +1,9 @@
 package com.thetestingacademy.tests.TTA_BaNK;
 
 import com.thetestingacademy.base.CommonToALL;
+import com.thetestingacademy.baseTest.CommonToAllTest;
+import com.thetestingacademy.driver.DriverManagerTL;
+import com.thetestingacademy.utils.WaitHelpers;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
 import io.qameta.allure.Severity;
@@ -12,7 +15,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class TTA_Bank_Add_Beneficiary extends CommonToALL {
+public class TTA_Bank_Add_Beneficiary extends CommonToAllTest {
 
     @Owner("Sachin Gaba")
     @Severity(SeverityLevel.CRITICAL)
@@ -20,8 +23,9 @@ public class TTA_Bank_Add_Beneficiary extends CommonToALL {
     @Test
 public void test_add_beneficiary(){
 
-        WebDriver driver = new ChromeDriver();
-        driver.get("https://tta-bank-digital-973242068062.us-west1.run.app/");
+     //   WebDriver driver = new ChromeDriver();
+       WebDriver driver= DriverManagerTL.getDriver();
+       driver.get("https://tta-bank-digital-973242068062.us-west1.run.app/");
 
 
 //Login User
@@ -56,11 +60,7 @@ public void test_add_beneficiary(){
         SignIn_btn.click();
 
 
-
-
-
-
-
+            WaitHelpers.implicitWait(driver,5);
         WebElement verify_dash = driver.findElement(By.xpath("//h1[contains(text(),\"Dashboard\")]"));
         Assert.assertTrue(verify_dash.isDisplayed());
 

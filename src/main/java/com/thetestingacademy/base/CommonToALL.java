@@ -6,7 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
 
-import static com.thetestingacademy.driver.DriverManager.getDriver;
+import static com.thetestingacademy.driver.DriverManagerTL.*;
 
 public class CommonToALL {
     // Common functionality for all tests

@@ -26,7 +26,10 @@ public class profilePage {
     @FindBy(name ="firstName")
     private WebElement username;
 
-    private By myProfile = By.xpath("//li[@id=\"menuProfile\"]");
+    @FindBy(xpath = "//li[@id=\"menuProfile\"]")
+    private WebElement myProfile;
+
+   // private By myProfile = By.xpath("//li[@id=\"menuProfile\"]");
     private By viewProfile = By.id("view_profile");
     private By firstName = By.name("firstName");
     private By lastName = By.name("lastName");
@@ -47,7 +50,8 @@ public class profilePage {
     public void updateProfile() {
 
 
-        driver.findElement(myProfile).click();
+        myProfile.click();
+
         driver.findElement(viewProfile).click();
         driver.findElement(firstName).clear();
         driver.findElement(firstName).sendKeys(PropertiesReader.readKey("firstname"));

@@ -1,5 +1,6 @@
 package com.thetestingacademy.pages;
 
+import com.thetestingacademy.driver.DriverManagerTL;
 import com.thetestingacademy.utils.PropertiesReader;
 import com.thetestingacademy.utils.WaitHelpers;
 import io.qameta.allure.internal.shadowed.jackson.databind.annotation.JsonAppend;
@@ -8,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import static org.openqa.selenium.support.locators.RelativeLocator.*;
+import org.testng.Assert;
 import java.util.List;
 
 public class SessionBookingPage {
@@ -50,23 +52,23 @@ public class SessionBookingPage {
     private By popUpClose = By.xpath("//button[text()=\"OK\"]");
 
     public void sessionBooking(){
-       driver.findElement(book_level1).click();
-       //Sales
-        WaitHelpers.checkVisibility(driver,book_level2);
+        WebDriver driver = DriverManagerTL.getDriver();
+
+        driver.findElement(book_level1).click();
+        //Sales
+        WaitHelpers.checkVisibility(driver, book_level2);
         driver.findElement(book_level2).click();
-        WaitHelpers.checkVisibility(driver,dropSpec);
+        WaitHelpers.checkVisibility(driver, dropSpec);
         driver.findElement(dropSpec).click();
         driver.findElement(selectSpec).click();
         driver.findElement(saveSelect).click();
-    //    driver.findElement(firstSpeakBtn).click();
+//    driver.findElement(firstSpeakBtn).click();
         WaitHelpers.waitJVM(2000);
         System.out.println(mentorPath);
 
-driver.findElement(with(By.tagName("a")).below(firstSpeakBtn)).click();
+        driver.findElement(with(By.tagName("a")).below(firstSpeakBtn)).click();
 
-
-
-        WaitHelpers.checkVisibility(driver,firstTimeSlot);
+        WaitHelpers.checkVisibility(driver, firstTimeSlot);
         driver.findElement(firstTimeSlot).click();
         //Accept the Slot
         driver.findElement(slot_Accept).click();
@@ -81,12 +83,13 @@ driver.findElement(with(By.tagName("a")).below(firstSpeakBtn)).click();
         driver.findElement(save).click();
         WebElement confirmClick = driver.findElement(By.id("booking_confirm"));
         confirmClick.click();
-        WaitHelpers.checkVisibility(driver,confirmYes);
+        WaitHelpers.checkVisibility(driver, confirmYes);
         driver.findElement(confirmYes).click();
-        WaitHelpers.waitJVM(5000);
+        WaitHelpers.implicitWait(driver,3);
         driver.findElement(successMsg);
-        driver.findElement(popUpClose).click();
 
+        Assert.assertTrue(driver.findElement(successMsg).isDisplayed());
+        driver.findElement(popUpClose).click();
     }
 
 
