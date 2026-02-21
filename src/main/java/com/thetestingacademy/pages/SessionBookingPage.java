@@ -5,12 +5,16 @@ import com.thetestingacademy.utils.PropertiesReader;
 import com.thetestingacademy.utils.WaitHelpers;
 import io.qameta.allure.internal.shadowed.jackson.databind.annotation.JsonAppend;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import static org.openqa.selenium.TakesScreenshot.*;
 import static org.openqa.selenium.support.locators.RelativeLocator.*;
 import org.testng.Assert;
 import java.util.List;
+
 
 public class SessionBookingPage {
     public WebDriver getDriver() {
@@ -78,6 +82,7 @@ public class SessionBookingPage {
         driver.findElement(input3).sendKeys(PropertiesReader.readKey("randomText3"));
         driver.findElement(input4).sendKeys(PropertiesReader.readKey("randomText4"));
         driver.findElement(input5).sendKeys(PropertiesReader.readKey("randomText5"));
+
         driver.findElement(checkBox_listed).click();
         //Save and Continue
         driver.findElement(save).click();

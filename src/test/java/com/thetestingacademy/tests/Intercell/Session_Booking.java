@@ -1,16 +1,13 @@
 package com.thetestingacademy.tests.Intercell;
 
-import com.thetestingacademy.base.CommonToALL;
 import com.thetestingacademy.baseTest.CommonToAllTest;
+import com.thetestingacademy.baseTest.TakeScreenshot;
 import com.thetestingacademy.baseTest.WaitHelpers;
-import com.thetestingacademy.driver.DriverManager;
 import com.thetestingacademy.driver.DriverManagerTL;
 import com.thetestingacademy.pages.SessionBookingPage;
 import com.thetestingacademy.pages.menteeLoginpage;
 import com.thetestingacademy.utils.PropertiesReader;
-import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -18,11 +15,9 @@ import io.qameta.allure.Owner;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
 
-import static com.thetestingacademy.driver.DriverManager.driver;
 
 public class Session_Booking extends CommonToAllTest {
 
@@ -39,10 +34,6 @@ public class Session_Booking extends CommonToAllTest {
                 // Session Booking
                 SessionBookingPage s1 = new SessionBookingPage(driver);
 
-                // Screenshot
-                File src = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
-                String path = System.getProperty("user.dir") + "/FailureScreenshot/BookingScreenshots/booking.png";
-                FileUtils.copyFile(src, new File(path));
 
                 // Booking Done
                 s1.sessionBooking();
@@ -51,9 +42,17 @@ public class Session_Booking extends CommonToAllTest {
                 // Upcoming Session view
                 WebElement upcomingSession = driver.findElement(By.xpath("//span[contains(text(),\"Sessions\")]"));
                 upcomingSession.click();
+
+
+
                 WaitHelpers.checkVisibility(driver, By.xpath("//a[@data-target=\"#list_view\"]"));
+
+
+
+
                 WebElement upcomingViewList = driver.findElement(By.xpath("//a[@data-target=\"#list_view\"]"));
                 upcomingViewList.click();
+                TakeScreenshot.TakeScreenshot_IC("Intercell","CreateSession");
 
                 WebElement viewSession = driver.findElement(By.xpath(
                         "//div[contains(@class,'float-right')]//button[contains(text(),'View More')][1]"));
