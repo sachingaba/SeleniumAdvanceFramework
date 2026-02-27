@@ -22,7 +22,7 @@
     <maven.compiler.target>17</maven.compiler.target>
 
     <!-- Dependency Versions -->
-    <selenium.version>4.27.0</selenium.version>
+    <selenium.version>4.41.0</selenium.version>
     <testng.version>7.10.2</testng.version>
     <allure.version>2.29.0</allure.version>
     <log4j.version>2.24.3</log4j.version>
@@ -52,7 +52,7 @@
     <dependency>
       <groupId>org.seleniumhq.selenium</groupId>
       <artifactId>selenium-java</artifactId>
-      <version>4.40.0</version>
+      <version>${selenium.version}</version>
       <scope>compile</scope>
     </dependency>
 

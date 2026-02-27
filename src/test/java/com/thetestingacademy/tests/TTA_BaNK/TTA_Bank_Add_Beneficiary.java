@@ -3,6 +3,7 @@ package com.thetestingacademy.tests.TTA_BaNK;
 import com.thetestingacademy.base.CommonToALL;
 import com.thetestingacademy.baseTest.CommonToAllTest;
 import com.thetestingacademy.driver.DriverManagerTL;
+import com.thetestingacademy.listeners.RetryAnalyzer;
 import com.thetestingacademy.utils.WaitHelpers;
 import io.qameta.allure.Description;
 import io.qameta.allure.Owner;
@@ -20,7 +21,7 @@ public class TTA_Bank_Add_Beneficiary extends CommonToAllTest {
     @Owner("Sachin Gaba")
     @Severity(SeverityLevel.CRITICAL)
     @Description("Verify the beneficiary is added successfully")
-    @Test
+    @Test(retryAnalyzer = RetryAnalyzer.class)
 public void test_add_beneficiary(){
 
      //   WebDriver driver = new ChromeDriver();
@@ -62,6 +63,7 @@ public void test_add_beneficiary(){
 
             WaitHelpers.implicitWait(driver,5);
         WebElement verify_dash = driver.findElement(By.xpath("//h1[contains(text(),\"Dashboard\")]"));
+        Assert.fail();
         Assert.assertTrue(verify_dash.isDisplayed());
 
             WebElement transfer_btn = driver.findElement(By.xpath("//button[contains(text(),\"Transfer Funds\")]"));
