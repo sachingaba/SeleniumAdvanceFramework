@@ -27,6 +27,9 @@ public class menteeLogin_Improved extends CommonToAllTest {
         // Page Object Model
         logger.info("login to Intercell Website");
         logger.info("Hello");
+
+        Assert.fail();
+
         menteeLoginpage l1 = new menteeLoginpage(DriverManager.getDriver());
         String error_msg = l1.loginToIC_Invalid(PropertiesReader.readKey("user"),
                 PropertiesReader.readKey("invalid_pass"));
@@ -41,6 +44,10 @@ public class menteeLogin_Improved extends CommonToAllTest {
     @Owner("Sachin Gaba")
     @Test(retryAnalyzer = RetryAnalyzer.class)
     public void verifyCredentials_Valid() {
+
+        logger.info("Starting verifyCredentials_Valid");
+
+        Assert.fail();
 
         // Page Object Model
         menteeLoginpage l2 = new menteeLoginpage(DriverManager.getDriver());

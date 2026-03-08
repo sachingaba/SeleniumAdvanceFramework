@@ -63,13 +63,13 @@ public void test_add_beneficiary(){
 
             WaitHelpers.implicitWait(driver,5);
         WebElement verify_dash = driver.findElement(By.xpath("//h1[contains(text(),\"Dashboard\")]"));
-        Assert.fail();
+
         Assert.assertTrue(verify_dash.isDisplayed());
 
             WebElement transfer_btn = driver.findElement(By.xpath("//button[contains(text(),\"Transfer Funds\")]"));
             transfer_btn.click();
 
-
+Assert.fail();
         WebElement add_ben = driver.findElement(By.xpath("//button[text()=\"Manage Beneficiaries\"]"));
         add_ben.click();
 

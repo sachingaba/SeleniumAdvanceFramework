@@ -6,14 +6,13 @@ import java.util.Properties;
 
 public class PropertiesReader {
 
+    // read the data.properties file and give the value of key
 
-    //read the data.properties file and give the value of key
-
-    public static String readKey(String Key){
+    public static String readKey(String Key) {
         Properties p;
         try {
             String user_dir = System.getProperty("user.dir");
-            String file_path = user_dir+"/src/main/java/resources/data.properties";
+            String file_path = user_dir + "/src/main/resources/data.properties";
 
             FileInputStream fileInputStream = new FileInputStream(file_path);
             p = new Properties();
@@ -21,6 +20,6 @@ public class PropertiesReader {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-return p.getProperty(Key);
+        return p.getProperty(Key);
     }
 }

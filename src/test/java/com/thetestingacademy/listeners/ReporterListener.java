@@ -3,22 +3,23 @@ package com.thetestingacademy.listeners;
 import org.testng.*;
 import org.testng.xml.XmlSuite;
 
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class ReporterListener implements IReporter {
     @Override
     public void generateReport(List<XmlSuite> xmlSuites, List<ISuite> suites, String outputDirectory) {
- outputDirectory ="C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\Reports";
+        outputDirectory = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\Reports";
 
-        String reportPath = outputDirectory + "/custom-report.html";
+        String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
+        String reportPath = outputDirectory + "\\custom-report-" + timestamp + ".html";
 
-        try {
-            FileWriter file = new FileWriter(reportPath);
-            PrintWriter writer = new PrintWriter(file);
+        try (FileWriter file = new FileWriter(reportPath);
+                PrintWriter writer = new PrintWriter(file)) {
             writer.println("<html><head><title>TestNG Custom Report</title>");
             writer.println("<style>table{border-collapse:collapse}th,td{border:1px solid #ddd;padding:8px}</style>");
             writer.println("</head><body>");
@@ -48,8 +49,7 @@ public class ReporterListener implements IReporter {
                             writer.println(String.format(
                                     "<tr><td>%s</td><td>%d ms</td></tr>",
                                     result.getName(),
-                                    result.getEndMillis() - result.getStartMillis()
-                            ));
+                                    result.getEndMillis() - result.getStartMillis()));
                         }
                         writer.println("</table>");
                     }
@@ -59,12 +59,10 @@ public class ReporterListener implements IReporter {
                 writer.println("<h1>Summary</h1>");
                 writer.println(String.format(
                         "<p>Total: %d | Passed: %d | Failed: %d | Skipped: %d</p>",
-                        total, passed, failed, skipped
-                ));
+                        total, passed, failed, skipped));
 
                 writer.println("</body></html>");
                 System.out.println("Custom report generated: " + reportPath);
-
 
             }
         } catch (IOException e) {
@@ -72,4 +70,3 @@ public class ReporterListener implements IReporter {
         }
     }
 }
-
