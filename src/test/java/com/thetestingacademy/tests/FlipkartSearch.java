@@ -31,12 +31,13 @@ public class FlipkartSearch {
         driver.manage().window().maximize();
         driver.navigate().to("https://www.flipkart.com/");
 
-        //form[@class='lilxh_ header-form-search isa71P']//input[@placeholder='Search for Products, Brands and More']
+        // form[@class='lilxh_ header-form-search isa71P']//input[@placeholder='Search
+        // for Products, Brands and More']
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"b3wTlE\"]")));
 
-WebElement cross = driver.findElement(By.xpath("//span[@class=\"b3wTlE\"]"));
-cross.click();
+        WebElement cross = driver.findElement(By.xpath("//span[@class=\"b3wTlE\"]"));
+        cross.click();
         WebElement searchBox = driver.findElement(By.name("q"));
 
         Actions actions = new Actions(driver);
@@ -44,19 +45,18 @@ cross.click();
 
         WebElement next = driver.findElement(By.xpath("//a[@class=\"jgg0SZ\" and span=\"Next\"]"));
 
-        while(next.isDisplayed()){
-            List<WebElement> lists = driver.findElements(By.xpath("//div[@class=\"nZIRY7\"]"));
+        while (next.isDisplayed()) {
+            List<WebElement> lists = driver.findElements(By.xpath("//div[@class=\"k7wcnx\"]"));
 
-            for(WebElement list:lists){
+            for (WebElement list : lists) {
                 wait.until(ExpectedConditions.visibilityOf(list));
                 System.out.println(list.getText());
-                String file = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch.txt";
-                try {
-                    FileWriter writer = new FileWriter(file);
-                    writer.write((Objects.requireNonNull(list.getAttribute("href"))));
-                } catch (IOException e) {
-                    System.out.println("File not found");
-                }
+                String file = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch1.txt";
+
+                FileWriter writer = new FileWriter(file);
+                writer.write(list.getText());
+                writer.close();
+
 
             }
             wait.until(ExpectedConditions.visibilityOf(next)).isDisplayed();
