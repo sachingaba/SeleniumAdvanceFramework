@@ -45,23 +45,26 @@ public class FlipkartSearch {
 
         WebElement next = driver.findElement(By.xpath("//a[@class=\"jgg0SZ\" and span=\"Next\"]"));
 
-        while (next.isDisplayed()) {
-            List<WebElement> lists = driver.findElements(By.xpath("//div[@class=\"k7wcnx\"]"));
+        String filePath = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch1.txt";
+        try (FileWriter writer = new FileWriter(filePath)) {
+            while (next.isDisplayed()) {
+                List<WebElement> lists = driver.findElements(By.xpath("//div[@class=\"k7wcnx\"]"));
 
-            for (WebElement list : lists) {
-                wait.until(ExpectedConditions.visibilityOf(list));
-                System.out.println(list.getText());
-                String file = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch1.txt";
-
-                FileWriter writer = new FileWriter(file);
-                writer.write(list.getText());
-                writer.close();
-
-
+                for (WebElement list : lists) {
+                    wait.until(ExpectedConditions.visibilityOf(list));
+                    String text = list.getText();
+                    System.out.println(text);
+                    writer.write(text + System.lineSeparator());
+                }
+                wait.until(ExpectedConditions.visibilityOf(next)).isDisplayed();
+                actions.moveToElement(next).click().build().perform();
+                // Wait for page load/next button to be available again if necessary
+                Thread.sleep(2000); // Simple wait for demo, could be improved with dynamic wait
             }
-            wait.until(ExpectedConditions.visibilityOf(next)).isDisplayed();
-            actions.moveToElement(next).click().build().perform();
-
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            driver.quit();
         }
 
     }
