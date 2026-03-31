@@ -34,32 +34,68 @@ public class FlipkartSearch {
         // form[@class='lilxh_ header-form-search isa71P']//input[@placeholder='Search
         // for Products, Brands and More']
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(7));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[@class=\"b3wTlE\"]")));
+        // Handling the login popup if it appears
+        try {
+            wait.until(ExpectedConditions
+                    .visibilityOfElementLocated(By.xpath("//span[text()='✕' or @class='_30XB9F' or @class='b3wTlE']")));
+            WebElement cross = driver
+                    .findElement(By.xpath("//span[text()='✕' or @class='_30XB9F' or @class='b3wTlE']"));
+            cross.click();
+        } catch (Exception e) {
+            System.out.println("Login popup did not appear or was already closed.");
+        }
 
-        WebElement cross = driver.findElement(By.xpath("//span[@class=\"b3wTlE\"]"));
-        cross.click();
         WebElement searchBox = driver.findElement(By.name("q"));
-
         Actions actions = new Actions(driver);
         actions.moveToElement(searchBox).click().sendKeys("Nokia phones").sendKeys(Keys.ENTER).build().perform();
 
-        WebElement next = driver.findElement(By.xpath("//a[@class=\"jgg0SZ\" and span=\"Next\"]"));
+        String filePath = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch.txt";
 
-        String filePath = "C:\\Users\\devin\\IdeaProjects\\SeleniumAdvanceFramework\\src\\test\\java\\com\\thetestingacademy\\tests\\FlipkartSearch1.txt";
         try (FileWriter writer = new FileWriter(filePath)) {
-            while (next.isDisplayed()) {
-                List<WebElement> lists = driver.findElements(By.xpath("//div[@class=\"k7wcnx\"]"));
+            boolean hasNext = true;
+            while (hasNext) {
+                // Wait for search results to load
+                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
+                        "//div[contains(@class, 'KzDlHZ') or contains(@class, 'hGSR34') or contains(@class, 'nZIRY7') or @class='w_S_f8']")));
 
-                for (WebElement list : lists) {
-                    wait.until(ExpectedConditions.visibilityOf(list));
-                    String text = list.getText();
-                    System.out.println(text);
-                    writer.write(text + System.lineSeparator());
+                // Find all product title elements on the current page
+                List<WebElement> productElements = driver
+                        .findElements(By.xpath("//div[contains(@class, 'KzDlHZ') or @class='w_S_f8']"));
+                if (productElements.isEmpty()) {
+                    // Fallback to a broader search if specific classes fail
+                    productElements = driver.findElements(By.xpath("//a[contains(@class, 'w_S_f8')]//div"));
                 }
-                wait.until(ExpectedConditions.visibilityOf(next)).isDisplayed();
-                actions.moveToElement(next).click().build().perform();
-                // Wait for page load/next button to be available again if necessary
-                Thread.sleep(2000); // Simple wait for demo, could be improved with dynamic wait
+
+                System.out.println("Found " + productElements.size() + " products on this page.");
+                for (WebElement product : productElements) {
+                    try {
+                        String text = product.getText();
+                        if (text != null && !text.isEmpty()) {
+                            System.out.println(text);
+                            writer.write(text + System.lineSeparator());
+                        }
+                    } catch (Exception e) {
+                        System.err.println("Error reading product text: " + e.getMessage());
+                    }
+                }
+
+                // Check for 'Next' button and click it
+                try {
+                    List<WebElement> nextButtons = driver
+                            .findElements(By.xpath("//a[span[text()='Next']] | //a[contains(@class, 'jgg0SZ')]"));
+                    if (!nextButtons.isEmpty() && nextButtons.get(0).isDisplayed()) {
+                        WebElement next = nextButtons.get(0);
+                        actions.moveToElement(next).click().build().perform();
+                        // Wait for page transition
+                        Thread.sleep(3000);
+                    } else {
+                        hasNext = false;
+                        System.out.println("No more pages found.");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Pagination ended or error occurred: " + e.getMessage());
+                    hasNext = false;
+                }
             }
         } catch (Exception e) {
             e.printStackTrace();
