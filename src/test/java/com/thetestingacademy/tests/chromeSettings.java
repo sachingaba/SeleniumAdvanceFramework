@@ -1,25 +1,31 @@
 package com.thetestingacademy.tests;
 
-import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class Google {
+public class chromeSettings {
 
 
     @Test
-    public void getValueInSearch(){
+    public void getValueInSearch() throws InterruptedException {
 
         WebDriver driver = new ChromeDriver();
 
         driver.manage().window().maximize();
-        driver.get("https://www.google.com/");
+        driver.get("chrome://settings/");
 
-        WebElement searchBox = driver.findElement(By.className("gLFyf"));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+
+
+
+        WebElement searchBox = (WebElement) js.executeScript("return document.querySelector('settings-ui').shadowRoot.querySelector('cr-toolbar').shadowRoot.querySelector('div#centeredContent').querySelector('cr-toolbar-search-field#search').shadowRoot.querySelector('div#content').querySelector('div#searchTerm').querySelector('input#searchInput')");
+        Assert.assertNotNull(searchBox);
         searchBox.sendKeys("selenium");
+        Thread.sleep(10000);
 
         System.out.println("Attribute value: "+searchBox.getAttribute("value"));
 
