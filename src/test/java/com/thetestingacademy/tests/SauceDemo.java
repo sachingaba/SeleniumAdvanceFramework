@@ -48,7 +48,7 @@ driver.navigate().to("https://www.saucedemo.com/inventory-item.html?id=4");
 driver.navigate().to("https://www.saucedemo.com/inventory.html");
         Actions actions = new Actions(driver);
 
-        actions.sendKeys(Keys.SPACE).build().perform();
+        actions.sendKeys(Keys.ENTER).build().perform();
 
        List<WebElement> products = driver.findElements(By.xpath("//div[@data-test=\"inventory-item-price\"]"));
 
