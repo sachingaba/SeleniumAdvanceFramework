@@ -55,25 +55,21 @@ public class FlipkartSearch {
             boolean hasNext = true;
             while (hasNext) {
                 // Wait for search results to load
-                wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(
-                        "//div[contains(@class, 'KzDlHZ') or contains(@class, 'hGSR34') or contains(@class, 'nZIRY7') or @class='w_S_f8']")));
+                //wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("div[@class=\"RG5Slk\"]")));
 
                 // Find all product title elements on the current page
-                List<WebElement> productElements = driver
-                        .findElements(By.xpath("//div[contains(@class, 'KzDlHZ') or @class='w_S_f8']"));
-                if (productElements.isEmpty()) {
-                    // Fallback to a broader search if specific classes fail
-                    productElements = driver.findElements(By.xpath("//a[contains(@class, 'w_S_f8')]//div"));
-                }
+                List<WebElement> productElements = driver.findElements(By.className("RG5Slk"));
+
 
                 System.out.println("Found " + productElements.size() + " products on this page.");
+
                 for (WebElement product : productElements) {
                     try {
                         String text = product.getText();
-                        if (text != null && !text.isEmpty()) {
-                            System.out.println(text);
-                            writer.write(text + System.lineSeparator());
-                        }
+
+                        System.out.println(text);
+                        writer.write(text + System.lineSeparator());
+
                     } catch (Exception e) {
                         System.err.println("Error reading product text: " + e.getMessage());
                     }
@@ -81,13 +77,13 @@ public class FlipkartSearch {
 
                 // Check for 'Next' button and click it
                 try {
-                    List<WebElement> nextButtons = driver
-                            .findElements(By.xpath("//a[span[text()='Next']] | //a[contains(@class, 'jgg0SZ')]"));
-                    if (!nextButtons.isEmpty() && nextButtons.get(0).isDisplayed()) {
-                        WebElement next = nextButtons.get(0);
-                        actions.moveToElement(next).click().build().perform();
+                   WebElement nextButtons = driver
+                            .findElement(By.xpath("//a[span[text()='Next']] | //a[contains(@class, 'jgg0SZ')]"));
+                    if (nextButtons.isDisplayed()) {
+
+                        actions.moveToElement(nextButtons).click().build().perform();
                         // Wait for page transition
-                        Thread.sleep(3000);
+                        wait.until(ExpectedConditions.visibilityOf(nextButtons));
                     } else {
                         hasNext = false;
                         System.out.println("No more pages found.");
@@ -103,5 +99,5 @@ public class FlipkartSearch {
             driver.quit();
         }
 
-    }
-}
+            }
+        }
