@@ -83,6 +83,7 @@ public class FlipkartSearch {
 
                         actions.moveToElement(nextButtons).click().build().perform();
                         // Wait for page transition
+
                         wait.until(ExpectedConditions.visibilityOf(nextButtons));
                     } else {
                         hasNext = false;
