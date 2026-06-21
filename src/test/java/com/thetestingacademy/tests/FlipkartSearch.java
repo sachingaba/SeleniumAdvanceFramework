@@ -80,11 +80,11 @@ public class FlipkartSearch {
                    WebElement nextButtons = driver
                             .findElement(By.xpath("//a[span[text()='Next']] | //a[contains(@class, 'jgg0SZ')]"));
                     if (nextButtons.isDisplayed()) {
-
+                        wait.until(ExpectedConditions.visibilityOf(nextButtons));
                         actions.moveToElement(nextButtons).click().build().perform();
                         // Wait for page transition
 
-                        wait.until(ExpectedConditions.visibilityOf(nextButtons));
+
                     } else {
                         hasNext = false;
                         System.out.println("No more pages found.");
