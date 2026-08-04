@@ -19,6 +19,7 @@ public class UpcomingSessionPage extends CommonToALL {
         this.driver = driver;
     }
 
+
     WebDriver driver;
 
     public WebDriver getDriver() {
