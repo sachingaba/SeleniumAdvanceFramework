@@ -38,7 +38,6 @@ public class UpcomingSessionPage extends CommonToALL {
     //span[@class=\"meta\"]/following-sibling::span
     //div[@class='div-box']//span[contains(text(),"Greenland")]
 
-
     public void viewUpcomingSession() {
         WebDriver driver = DriverManagerTL.getDriver();
         WaitHelpers.checkVisibility(driver, upcomingSession);
