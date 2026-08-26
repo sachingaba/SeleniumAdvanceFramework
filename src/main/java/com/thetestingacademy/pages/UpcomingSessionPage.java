@@ -59,9 +59,7 @@ WaitHelpers.implicitWait(driver,2);
                 button.click();
                 break;
             }
-
         }
-
         /*
          * WaitHelpers.checkVisibility(driver,viewSession);
          * if(driver.findElement(viewSession).isDisplayed()) {
