@@ -61,6 +61,7 @@ WaitHelpers.implicitWait(driver,2);
             }
         }
 
+
         /*
          * WaitHelpers.checkVisibility(driver,viewSession);
          * if(driver.findElement(viewSession).isDisplayed()) {
